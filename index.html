@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>TETRIS - Pastel Edition</title>
+  <link rel="stylesheet" href="style.css?v=pastel">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="game-wrapper">
+    <!-- Header -->
+    <header class="game-header">
+      <h1 class="logo">TETRIS<span class="sub-logo">PASTEL</span></h1>
+      <div class="header-controls">
+        <button id="sound-btn" class="icon-btn" title="サウンド切替" aria-label="Sound Toggle">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <button id="bgm-btn" class="icon-btn" title="BGM切替" aria-label="BGM Toggle">
+          <span id="bgm-icon">🎵</span>
+        </button>
+        <button id="pause-btn" class="icon-btn" title="一時停止" aria-label="Pause Game">
+          <span id="pause-icon">⏸️</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="game-container">
+      <!-- Left Panel: HOLD & Stats -->
+      <aside class="side-panel left-panel">
+        <div class="panel-box hold-box">
+          <h2>HOLD</h2>
+          <div class="canvas-box">
+            <canvas id="hold-canvas" width="120" height="120"></canvas>
+          </div>
+          <span class="hint-text">[C] / [Shift]</span>
+        </div>
+
+        <div class="panel-box stats-box">
+          <div class="stat-item">
+            <span class="stat-label">SCORE</span>
+            <span id="score-display" class="stat-value">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">HIGH SCORE</span>
+            <span id="high-score-display" class="stat-value">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">LEVEL</span>
+            <span id="level-display" class="stat-value">1</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">LINES</span>
+            <span id="lines-display" class="stat-value">0</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Center: Main Game Board -->
+      <main class="board-wrapper">
+        <div class="canvas-glow">
+          <canvas id="board-canvas" width="300" height="600"></canvas>
+        </div>
+
+        <!-- Overlays -->
+        <div id="start-overlay" class="overlay">
+          <div class="overlay-card">
+            <h2>TETRIS</h2>
+            <p class="flavor-text">Pastel & Relaxing Puzzle</p>
+            <button id="start-btn" class="primary-btn">GAME START</button>
+            <div class="key-guide">
+              <div class="key-row"><kbd>←</kbd><kbd>→</kbd> : 移動</div>
+              <div class="key-row"><kbd>↑</kbd> / <kbd>X</kbd> : 右回転</div>
+              <div class="key-row"><kbd>Z</kbd> : 左回転</div>
+              <div class="key-row"><kbd>↓</kbd> : ソフトドロップ</div>
+              <div class="key-row"><kbd>Space</kbd> : ハードドロップ</div>
+              <div class="key-row"><kbd>C</kbd> / <kbd>Shift</kbd> : ホールド</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="pause-overlay" class="overlay hidden">
+          <div class="overlay-card">
+            <h2>PAUSED</h2>
+            <button id="resume-btn" class="primary-btn">RESUME</button>
+            <button id="restart-from-pause-btn" class="secondary-btn">RESTART</button>
+          </div>
+        </div>
+
+        <div id="gameover-overlay" class="overlay hidden">
+          <div class="overlay-card">
+            <h2 class="gameover-title">GAME OVER</h2>
+            <div class="final-stats">
+              <div class="final-stat-item">
+                <span>Final Score:</span>
+                <span id="final-score" class="highlight">0</span>
+              </div>
+              <div class="final-stat-item">
+                <span>Lines Cleared:</span>
+                <span id="final-lines">0</span>
+              </div>
+              <div class="final-stat-item">
+                <span>Reached Level:</span>
+                <span id="final-level">1</span>
+              </div>
+            </div>
+            <button id="restart-btn" class="primary-btn">PLAY AGAIN</button>
+          </div>
+        </div>
+      </main>
+
+      <!-- Right Panel: NEXT Queue -->
+      <aside class="side-panel right-panel">
+        <div class="panel-box next-box">
+          <h2>NEXT</h2>
+          <div class="canvas-box">
+            <canvas id="next-canvas" width="120" height="300"></canvas>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- On-Screen Controls for Mobile / Touch Devices -->
+    <nav class="touch-controls" aria-label="Touch Controls">
+      <div class="touch-row">
+        <button id="btn-hold" class="touch-btn sm-btn">HOLD</button>
+        <button id="btn-rot-ccw" class="touch-btn rot-btn">⟲</button>
+        <button id="btn-rot-cw" class="touch-btn rot-btn">⟳</button>
+        <button id="btn-hard-drop" class="touch-btn hard-drop-btn">⚡ DROP</button>
+      </div>
+      <div class="touch-row">
+        <button id="btn-left" class="touch-btn arrow-btn">◀</button>
+        <button id="btn-down" class="touch-btn arrow-btn">▼</button>
+        <button id="btn-right" class="touch-btn arrow-btn">▶</button>
+      </div>
+    </nav>
+  </div>
+
+  <script src="tetris.js?v=pastel"></script>
+</body>
+</html>
